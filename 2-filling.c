@@ -1,0 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   2-filling.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/21 19:39:31 by ghenriqu          #+#    #+#             */
+/*   Updated: 2025/05/22 17:43:36 by ghenriqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+static int	ft_atoi(char *str)
+{
+	int	i;
+	int	n;
+	int	result;
+
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	n = 1;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			n *= -1;
+		i++;
+	}
+	result = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result *= 10;
+		result += str[i] - '0';
+		i++;
+	}
+	return (result * n);
+}
+
+static t_stack	*stack_new(int value)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(t_stack));
+	if (!new)
+		return (NULL);
+	new->value = value;
+	new->index = 0;
+	new->pos = -1;
+	new->target_pos = -1;
+	new->cost_a = -1;
+	new->cost_b = -1;
+	new->next = NULL;
+	return (new);
+}
+
+static void	stack_add_bottom(t_stack **stack, t_stack *new)
+{
+	t_stack	*tail;
+
+	if (!new)
+		return ;
+	if (!*stack)
+	{
+		*stack = new;
+		return ;
+	}
+	tail = get_stack_bottom(*stack);
+	tail->next = new;
+}
+
+t_stack	*get_stack_bottom(t_stack *stack)
+{
+	while (stack && stack->next)
+		stack = stack->next;
+	return (stack);
+}
+
+t_stack	*fill_stack_values(int argc, char **argv)
+{
+	t_stack		*stack_a;
+	long int	nb;
+	int			i;
+
+	stack_a = NULL;
+	nb = 0;
+	i = 1;
+	while (i < argc)
+	{
+		nb = ft_atoi(argv[i]);
+		if (nb > INT_MAX || nb < INT_MIN)
+			exit_error(&stack_a, NULL);
+		if (i == 1)
+			stack_a = stack_new((int)nb);
+		else
+			stack_add_bottom(&stack_a, stack_new((int)nb));
+		i++;
+	}
+	return (stack_a);
+}
