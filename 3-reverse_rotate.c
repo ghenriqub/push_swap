@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 17:18:16 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/22 17:43:18 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:05:29 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	reverse_rotate(t_stack **stack)
 	t_stack	*tail;
 	t_stack	*before_tail;
 
+	if (!*stack || !(*stack)->next)
+		return ;
 	tail = get_stack_bottom(*stack);
 	before_tail = get_stack_before_bottom(*stack);
 	temp = *stack;

@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 16:27:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/22 17:42:28 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:05:14 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	rotate(t_stack **stack)
 	t_stack	*temp;
 	t_stack	*tail;
 
+	if (!*stack || !(*stack)->next)
+		return ;
 	temp = *stack;
 	*stack = (*stack)->next;
 	tail = get_stack_bottom(*stack);

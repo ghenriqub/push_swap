@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:39:31 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/22 18:25:04 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:23:37 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	sort_array(int *array, int size)
 	while (i < size)
 	{
 		j = 0;
-		while (j < size - i)
+		while (j < size - i - 1)
 		{
 			if (array[j] > array[j + 1])
 			{
@@ -61,6 +61,16 @@ static int	get_index(int *sorted, int size, int value)
 		i++;
 	}
 	return (0);
+}
+
+int	get_arg_count(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+		i++;
+	return (i);
 }
 
 void	assign_index(t_stack *stack_a, int size)

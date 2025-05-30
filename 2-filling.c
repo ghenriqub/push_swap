@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:39:31 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/22 17:43:36 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:18:32 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static t_stack	*stack_new(int value)
 		return (NULL);
 	new->value = value;
 	new->index = 0;
-	new->pos = -1;
-	new->target_pos = -1;
+	new->position = -1;
+	new->target_position = -1;
 	new->cost_a = -1;
 	new->cost_b = -1;
 	new->next = NULL;
@@ -77,21 +77,26 @@ t_stack	*get_stack_bottom(t_stack *stack)
 	return (stack);
 }
 
-t_stack	*fill_stack_values(int argc, char **argv)
+t_stack	*fill_stack_values(int argc, char **argv, int stack_size)
 {
 	t_stack		*stack_a;
 	long int	nb;
 	int			i;
+	int			start;
 
 	stack_a = NULL;
 	nb = 0;
-	i = 1;
+	if (stack_size == 1)
+		start = 0;
+	else
+		start = 1;
+	i = start;
 	while (i < argc)
 	{
 		nb = ft_atoi(argv[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
 			exit_error(&stack_a, NULL);
-		if (i == 1)
+		if (i == start)
 			stack_a = stack_new((int)nb);
 		else
 			stack_add_bottom(&stack_a, stack_new((int)nb));

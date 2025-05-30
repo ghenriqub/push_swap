@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:57:59 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/22 18:46:19 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:22:24 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 		do_sa(stack_a);
 	else if (stack_size == 3)
 		sort_tiny(stack_a);
-	//else if (stack_size > 3 && !is_sorted(*stack_a))
-		//sort(stack_a, stack_b);
+	else if (stack_size > 3 && !is_sorted(*stack_a))
+		sort(stack_a, stack_b);
 }
 
 void	exit_error(t_stack **stack_a, t_stack **stack_b)
@@ -64,16 +64,25 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 	int		stack_size;
 
-	stack_size = argc - 1;
 	if (argc < 2)
 		return (0);
+	stack_size = 0;
+	if (argc == 2)
+	{
+		stack_size = 1;
+		argv = ft_split(argv[1]);
+		if (!argv)
+			exit_error(NULL, NULL);
+	}
 	if (!is_correct_input(argv))
 		exit_error(NULL, NULL);
 	stack_b = NULL;
-	stack_a = fill_stack_values(argc, argv);
+	stack_a = fill_stack_values(get_arg_count(argv), argv, stack_size);
+	stack_size = ft_stack_size(stack_a);
 	assign_index(stack_a, stack_size + 1);
 	push_swap(&stack_a, &stack_b, stack_size);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
-	return (0);
+	if (argc == 2)
+		free_split(argv);
 }

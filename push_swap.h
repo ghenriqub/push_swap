@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:37:49 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/22 18:26:36 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/30 12:43:06 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct s_stack
 	struct s_stack	*next;
 	int				value;
 	int				index;
-	int				pos;
-	int				target_pos;
+	int				position;
+	int				target_position;
 	int				cost_a;
 	int				cost_b;
 }					t_stack;
@@ -35,12 +35,17 @@ void	exit_error(t_stack **stack_a, t_stack **stack_b);
 // input check
 int		is_correct_input(char **argv);
 
+// split
+char	**ft_split(char const *str);
+void	free_split(char **array);
+
 // indexation
 void	assign_index(t_stack *stack_a, int size);
+int		get_arg_count(char **args);
 
 // stack
 t_stack	*get_stack_bottom(t_stack *stack);
-t_stack	*fill_stack_values(int argc, char **argv);
+t_stack	*fill_stack_values(int argc, char **argv, int stack_value);
 
 // swap
 void	do_sa(t_stack **stack_a);
@@ -61,7 +66,22 @@ void	do_rra(t_stack **stack_a);
 void	do_rrb(t_stack **stack_b);
 void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 
-// tiny
+// sort tiny
 void	sort_tiny(t_stack **stack);
+
+// sort
+void	sort(t_stack **stack_a, t_stack **stack_b);
+int		ft_stack_size(t_stack *stack);
+
+// cost
+void	cost(t_stack **stack_a, t_stack **stack_b);
+void	do_cheapest_move(t_stack **stack_a, t_stack **stack_b);
+
+// move
+void	do_move(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b);
+
+// position
+void	target_position(t_stack **stack_a, t_stack **stack_b);
+int		lowest_position(t_stack **stack);
 
 #endif
