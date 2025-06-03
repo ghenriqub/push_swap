@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:57:59 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/30 11:22:24 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:07:17 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exit_error(t_stack **stack_a, t_stack **stack_b)
 		free_stack(stack_a);
 	if (stack_b == NULL || *stack_b != NULL)
 		free_stack(stack_b);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit (1);
 }
 
@@ -74,12 +74,12 @@ int	main(int argc, char **argv)
 		if (!argv)
 			exit_error(NULL, NULL);
 	}
-	if (!is_correct_input(argv))
+	if (!is_correct_input(argv + !stack_size))
 		exit_error(NULL, NULL);
 	stack_b = NULL;
 	stack_a = fill_stack_values(get_arg_count(argv), argv, stack_size);
 	stack_size = ft_stack_size(stack_a);
-	assign_index(stack_a, stack_size + 1);
+	assign_index(stack_a, stack_size);
 	push_swap(&stack_a, &stack_b, stack_size);
 	free_stack(&stack_a);
 	free_stack(&stack_b);

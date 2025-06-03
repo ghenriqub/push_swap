@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:37:49 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/30 12:43:06 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:27:35 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		is_sorted(t_stack *stack);
 void	exit_error(t_stack **stack_a, t_stack **stack_b);
 
 // input check
+long	ft_atol(const char *str);
 int		is_correct_input(char **argv);
 
 // split

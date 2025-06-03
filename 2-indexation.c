@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:39:31 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/30 11:23:37 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:27:11 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	get_index(int *sorted, int size, int value)
 	int	i;
 
 	i = 0;
-	while (i < size)
+	while (i <= size)
 	{
 		if (sorted[i] == value)
 			return (i);
@@ -79,7 +79,7 @@ void	assign_index(t_stack *stack_a, int size)
 	t_stack	*tmp;
 
 	copy_values(sorted, stack_a);
-	sort_array(sorted, (size - 1));
+	sort_array(sorted, size);
 	tmp = stack_a;
 	while (tmp)
 	{

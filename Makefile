@@ -6,7 +6,7 @@
 #    By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:09:16 by ghenriqu          #+#    #+#              #
-#    Updated: 2025/05/30 12:31:07 by ghenriqu         ###   ########.fr        #
+#    Updated: 2025/05/30 12:48:18 by ghenriqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ all: $(NAME)
 
 # compile and create the lib:
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@echo "Building push_swap!"
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "Let's go! Push_swap built."
 
 # compile .o:
 %.o: %.c push_swap.h
@@ -52,13 +52,13 @@ $(NAME): $(OBJ)
 
 # clean files:
 clean:
-	$(RM) $(OBJ)
-	@echo "Object files removed!"
+	@$(RM) $(OBJ)
+	@echo "Object files gone!"
 
 # clean everything, .o and libft.a:
 fclean: clean
-	$(RM) $(NAME)
-	@echo "Binary removed!"
+	@$(RM) $(NAME)
+	@echo "Binary gone!"
 
 # recompile all:
 re: fclean all

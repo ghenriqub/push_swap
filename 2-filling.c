@@ -6,17 +6,17 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:39:31 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/30 11:18:32 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:09:13 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_atoi(char *str)
+long	ft_atol(const char *str)
 {
-	int	i;
-	int	n;
-	int	result;
+	long	i;
+	long	n;
+	long	result;
 
 	i = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
@@ -35,6 +35,8 @@ static int	ft_atoi(char *str)
 		result += str[i] - '0';
 		i++;
 	}
+	if ((result * n) > INT_MAX || (result * n) < INT_MIN)
+		exit_error(NULL, NULL);
 	return (result * n);
 }
 
@@ -93,9 +95,9 @@ t_stack	*fill_stack_values(int argc, char **argv, int stack_size)
 	i = start;
 	while (i < argc)
 	{
-		nb = ft_atoi(argv[i]);
+		nb = ft_atol(argv[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
-			exit_error(&stack_a, NULL);
+			return (0);
 		if (i == start)
 			stack_a = stack_new((int)nb);
 		else

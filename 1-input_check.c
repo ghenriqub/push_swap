@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:57:46 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/29 19:47:42 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:08:54 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,14 @@
 
 static int	nbcmp(const char *n1, const char *n2)
 {
-	int	i;
-	int	j;
+	int	str1;
+	int	str2;
 
-	i = 0;
-	j = 0;
-	if (n1[i] == '+')
-	{
-		if (n2[j] != '+')
-			i++;
-	}
-	else
-	{
-		if (n2[j] == '+')
-			j++;
-	}
-	while (n1[i] && n2[j] && n1[i] == n2[j])
-	{
-		i++;
-		j++;
-	}
-	return ((unsigned char)n1[i] - (unsigned char)n2[j]);
+	str1 = ft_atol(n1);
+	str2 = ft_atol(n2);
+	if (str1 == str2)
+		return (0);
+	return (1);
 }
 
 static int	have_duplicates(char **argv)
@@ -42,10 +29,10 @@ static int	have_duplicates(char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (argv[i])
 	{
-		j = 1;
+		j = 0;
 		while (argv[j])
 		{
 			if (i != j && nbcmp(argv[i], argv[j]) == 0)
@@ -90,18 +77,21 @@ int	is_correct_input(char **argv)
 	int	i;
 	int	nb_zero;
 
-	i = 1;
 	nb_zero = 0;
-	while (argv[i])
+	i = -1;
+	while (argv[++i])
 	{
 		if (!is_number(argv[i]))
+		{
+			exit_error(NULL, NULL);
 			return (0);
+		}
 		nb_zero += is_zero(argv[i]);
-		i++;
 	}
-	if (nb_zero > 1)
+	if (nb_zero > 1 || have_duplicates(argv))
+	{
+		exit_error(NULL, NULL);
 		return (0);
-	if (have_duplicates(argv))
-		return (0);
+	}
 	return (1);
 }

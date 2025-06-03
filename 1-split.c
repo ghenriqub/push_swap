@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:14:09 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/29 20:44:12 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:44:44 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**ft_split(char const *str)
 	int		i;
 
 	i = -1;
-	result = malloc((count_words(str) + 1) * sizeof(char *));
+	result = malloc((count_words(str) + 2) * sizeof(char *));
 	if (!result)
 		return (0);
 	while (*str)
