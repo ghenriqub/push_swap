@@ -6,25 +6,33 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:57:46 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/06/03 13:08:54 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/13 11:36:19 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	nbcmp(const char *n1, const char *n2)
+static int	nbcmp(const char *n1, const char *n2, char **argv, int argc)
 {
 	int	str1;
 	int	str2;
 
-	str1 = ft_atol(n1);
-	str2 = ft_atol(n2);
+	if (argc == 2)
+	{
+		str1 = ft_atol(n1, argv, argc);
+		str2 = ft_atol(n2, argv, argc);
+	}
+	else
+	{
+		str1 = ft_atol(n1, NULL, 0);
+		str2 = ft_atol(n2, NULL, 0);
+	}
 	if (str1 == str2)
 		return (0);
 	return (1);
 }
 
-static int	have_duplicates(char **argv)
+static int	have_duplicates(char **argv, int argc)
 {
 	int	i;
 	int	j;
@@ -35,7 +43,7 @@ static int	have_duplicates(char **argv)
 		j = 0;
 		while (argv[j])
 		{
-			if (i != j && nbcmp(argv[i], argv[j]) == 0)
+			if (i != j && nbcmp(argv[i], argv[j], argv, argc) == 0)
 				return (1);
 			j++;
 		}
@@ -53,44 +61,34 @@ static int	is_number(char *argv)
 		i++;
 	while (argv[i] && (argv[i] >= '0' && argv[i] <= '9'))
 		i++;
-	if (argv[i] != '\0' && !(argv[i] >= '0' && argv[i] <= '9'))
+	if ((argv[i] != '\0' && !(argv[i] >= '0' && argv[i] <= '9')) || i == 0)
+		return (0);
+	if ((argv[0] == '-' || argv[0] == '+') && i == 1)
 		return (0);
 	return (1);
 }
 
-static int	is_zero(char *argv)
+int	is_correct_input(char **argv, int argc, int stack)
 {
 	int	i;
 
-	i = 0;
-	if (argv[i] == '+' || argv[i] == '-')
-		i++;
-	while (argv[i] && (argv[i] == '0'))
-		i++;
-	if (argv[i] != '\0')
-		return (0);
-	return (1);
-}
-
-int	is_correct_input(char **argv)
-{
-	int	i;
-	int	nb_zero;
-
-	nb_zero = 0;
 	i = -1;
 	while (argv[++i])
 	{
 		if (!is_number(argv[i]))
 		{
-			exit_error(NULL, NULL);
-			return (0);
+			if (stack == 1)
+				exit_error(NULL, NULL, argv, argc);
+			else
+				exit_error(NULL, NULL, NULL, 0);
 		}
-		nb_zero += is_zero(argv[i]);
 	}
-	if (nb_zero > 1 || have_duplicates(argv))
+	if (have_duplicates(argv, argc))
 	{
-		exit_error(NULL, NULL);
+		if (stack == 1)
+			exit_error(NULL, NULL, argv, argc);
+		else
+			exit_error(NULL, NULL, NULL, 0);
 		return (0);
 	}
 	return (1);

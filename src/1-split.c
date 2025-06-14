@@ -6,13 +6,13 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:14:09 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/31 10:44:44 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/13 12:00:39 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	count_words(const char *str)
+int	count_words(const char *str)
 {
 	int	i;
 	int	count;

@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:57:59 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/31 19:07:17 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:09:24 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 		sort(stack_a, stack_b);
 }
 
-void	exit_error(t_stack **stack_a, t_stack **stack_b)
+void	exit_error(t_stack **stack_a, t_stack **stack_b, char **argv, int spl)
 {
+	if (spl)
+		free_split(argv);
 	if (stack_a == NULL || *stack_a != NULL)
 		free_stack(stack_a);
 	if (stack_b == NULL || *stack_b != NULL)
 		free_stack(stack_b);
-	write(2, "Error\n", 6);
+	write(1, "Error\n", 6);
 	exit (1);
 }
 
@@ -71,11 +73,11 @@ int	main(int argc, char **argv)
 	{
 		stack_size = 1;
 		argv = ft_split(argv[1]);
-		if (!argv)
-			exit_error(NULL, NULL);
+		if (!argv || !argv[0])
+			exit_error(NULL, NULL, argv, argc);
 	}
-	if (!is_correct_input(argv + !stack_size))
-		exit_error(NULL, NULL);
+	if (!is_correct_input((argv + !stack_size), argc, stack_size))
+		exit_error(NULL, NULL, argv, stack_size);
 	stack_b = NULL;
 	stack_a = fill_stack_values(get_arg_count(argv), argv, stack_size);
 	stack_size = ft_stack_size(stack_a);

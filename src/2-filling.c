@@ -6,13 +6,13 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:39:31 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/06/03 13:09:13 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:46:22 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atol(const char *str)
+long	ft_atol(const char *str, char **argv, int argc)
 {
 	long	i;
 	long	n;
@@ -36,7 +36,7 @@ long	ft_atol(const char *str)
 		i++;
 	}
 	if ((result * n) > INT_MAX || (result * n) < INT_MIN)
-		exit_error(NULL, NULL);
+		exit_error(NULL, NULL, argv, argc);
 	return (result * n);
 }
 
@@ -95,7 +95,7 @@ t_stack	*fill_stack_values(int argc, char **argv, int stack_size)
 	i = start;
 	while (i < argc)
 	{
-		nb = ft_atol(argv[i]);
+		nb = ft_atol(argv[i], argv, argc);
 		if (nb > INT_MAX || nb < INT_MIN)
 			return (0);
 		if (i == start)

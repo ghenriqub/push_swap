@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:37:49 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/05/31 19:27:35 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/06/13 11:32:15 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ typedef struct s_stack
 
 // utils
 int		is_sorted(t_stack *stack);
-void	exit_error(t_stack **stack_a, t_stack **stack_b);
+void	exit_error(t_stack **stack_a, t_stack **stack_b, char **argv, int spl);
 
 // input check
-long	ft_atol(const char *str);
-int		is_correct_input(char **argv);
+long	ft_atol(const char *str, char **argv, int argc);
+int		is_correct_input(char **argv, int argc, int stack);
 
 // split
 char	**ft_split(char const *str);
+int		count_words(const char *str);
 void	free_split(char **array);
 
 // indexation
